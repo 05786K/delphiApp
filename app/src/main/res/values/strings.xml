@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">delphiDisplays</string>
+    <string name="welcome_message">DELPHI DISPLAYS</string>
+    <string name="sign_in_message">Already have an account? Login</string>
+    <string name="sign_up_message">Don\'t have an account? Sign Up</string>
+    <string name="pork_nameTag">pork</string>
+
+</resources>
