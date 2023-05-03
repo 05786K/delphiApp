@@ -4,15 +4,42 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.delphidisplays.model.User;
+import com.example.delphidisplays.retrofit.RetrofitService;
+import com.example.delphidisplays.retrofit.UserApi;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class signInActivity extends AppCompatActivity {
 
     Button _login_btn;
     EditText _login_email;
     EditText _login_password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,16 +54,53 @@ public class signInActivity extends AppCompatActivity {
         _login_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                processLogin();
             }
         });
 
     }
 
-    //authenticate login
-    public void authenticateUser(){
+    public void processLogin(){
         //check password and confirm password are same
+        String email = _login_email.getText().toString();
+        String password = _login_password.getText().toString();
 
+
+
+        RetrofitService retrofitService = new RetrofitService();
+        UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
+
+
+        userApi.loginUser(email, password)
+                .enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, retrofit2.Response<User> response) {
+                        if(response.isSuccessful()){
+                            User user = response.body();
+
+                            //wire up data to user profile
+                            Intent goToProfile = new Intent(signInActivity.this, userProfile.class);
+
+                            goToProfile.putExtra("fullName", user.getFullName());
+                            goToProfile.putExtra("phone", user.getPhone());
+                            goToProfile.putExtra("email", user.getEmail());
+
+                            //start activity
+                            startActivity(goToProfile);
+                            finish();
+                        }else{
+                            Toast.makeText(signInActivity.this, "User Login Failed!", Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast.makeText(signInActivity.this, "User Login Failed!", Toast.LENGTH_LONG).show();
+
+                    }
+
+                });
 
 
     }

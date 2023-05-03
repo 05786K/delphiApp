@@ -14,13 +14,22 @@ import android.widget.Toast;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.delphidisplays.model.User;
+import com.example.delphidisplays.retrofit.RetrofitService;
+import com.example.delphidisplays.retrofit.UserApi;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class signUpActivity extends AppCompatActivity {
 
@@ -46,29 +55,23 @@ public class signUpActivity extends AppCompatActivity {
         _spicySeekBar = findViewById(R.id.spicy_seekBar_input);
 
 
-
         _signup_btn = findViewById(R.id.submit_btn);
         _signup_btn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                //call processfields functions
+            public void onClick(View v) {
                 processForm();
-
-
             }
         });
-
     }
-
     //when goToHome btn is clicked, the below function is invoked.
-    public void goToHome(View view){
+    public void goToHome(View view) {
         Intent intent = new Intent(signUpActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
 
     }
 
-    public void goToSignIn(View view){
+    public void goToSignIn(View view) {
         Intent intent = new Intent(signUpActivity.this, signInActivity.class);
         startActivity(intent);
         finish();
@@ -76,82 +79,70 @@ public class signUpActivity extends AppCompatActivity {
 
 
     //validate input fields here
-    public boolean validateFullName(){
+    public boolean validateFullName() {
         String fName = _fullName.getText().toString();
-        if(fName.isEmpty()) {
+        if (fName.isEmpty()) {
             _fullName.setError("fullName cannot be empty");
             return false;
-        }else{
+        } else {
             _fullName.setError(null);
             return true;
         }
     }
 
 
-    //process fields
-    public void processForm(){
-        if(!validateFullName()){
+    //process fields and send data to rest api
+    public void processForm() {
+        if (!validateFullName()) {
             return;
         }
 
-        //Init Request Queue
-        RequestQueue queue = Volley.newRequestQueue(signUpActivity.this);
+        System.out.println("kos called!");
 
-        //provide the url where the REST api is in. The URL we are posting to
-        String URL = "http://192.168.137.1:9082/delphi/register";
-
-        //create request object
-        StringRequest stringReq = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if(response.equalsIgnoreCase("success")){
-
-                    //after the user is filled the fields, and the registration is successfull
-                    //we gotta set the fields empty otherwise it might cause redundancy
-                    _fullName.setText(null);
-                    _phone.setText(null);
-                    _email.setText(null);
-                    _password.setText(null);
-                    _beefSeekBar.setProgress(0);
-                    _chkSeekBar.setProgress(0);
-                    _spicySeekBar.setProgress(0);
+        //pass the required variables to registerUser method in userApi
+        String fullName, phone, email, password, chicken, beef, spicy;
+        fullName = _fullName.getText().toString();
+        phone = _phone.getText().toString();
+        email = _email.getText().toString();
+        password = _password.getText().toString();
+        beef = String.valueOf(_beefSeekBar.getProgress());
+        chicken = String.valueOf(_chkSeekBar.getProgress());
+        spicy = String.valueOf(_spicySeekBar.getProgress());
 
 
 
-                    Toast.makeText(signUpActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
-                }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-                System.out.println(error.getMessage());
-                Toast.makeText(signUpActivity.this, "Registration Failed!", Toast.LENGTH_LONG).show();
+        //create a retrofit service, better keep these above user object
+        RetrofitService retrofitService = new RetrofitService();
+        UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
 
-            }
-        }){
-            //this object is send over to the Rest API
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> parameters = new HashMap<>();
-                parameters.put("fullName", _fullName.getText().toString());
-                parameters.put("phone", _phone.getText().toString());
-                parameters.put("email", _email.getText().toString());
-                parameters.put("password", _password.getText().toString());
-                parameters.put("beef", String.valueOf(_beefSeekBar.getProgress()));
-                parameters.put("chicken", String.valueOf(_chkSeekBar.getProgress()));
-                parameters.put("spicy", String.valueOf(_spicySeekBar.getProgress()));
+        userApi.registerUser(fullName, phone, email, password, beef, chicken, spicy)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        if(response.isSuccessful()) {
+                            Toast.makeText(signUpActivity.this, "User Registration Successful!", Toast.LENGTH_LONG).show();
+                            _fullName.setText(null);
+                            _phone.setText(null);
+                            _email.setText(null);
+                            _password.setText(null);
+                            _beefSeekBar.setProgress(0);
+                            _chkSeekBar.setProgress(0);
+                            _spicySeekBar.setProgress(0);
 
-                for(String str : parameters.values())
-                    System.out.println(str);
+                        }else{
+                            Toast.makeText(signUpActivity.this, "User Registration Failed!", Toast.LENGTH_LONG).show();
 
-                return parameters;
-            }
-        }; //end of request
+                        }
+                    }
 
-        //add string request to the queue
-        queue.add(stringReq);
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        Toast.makeText(signUpActivity.this, "User Registration Failed!", Toast.LENGTH_LONG).show();
+                        Logger.getLogger(signUpActivity.class.getName()).log(Level.SEVERE, "Error at", t);
+                    }
+                });
+
+
     }
 
 }
