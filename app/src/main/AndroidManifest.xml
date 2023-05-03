@@ -20,9 +20,6 @@
             android:name=".userProfile"
             android:exported="false" />
         <activity
-            android:name=".signUpDummy"
-            android:exported="false" />
-        <activity
             android:name=".signInActivity"
             android:exported="false" />
         <activity
