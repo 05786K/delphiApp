@@ -1,6 +1,5 @@
 package com.example.delphidisplays;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,18 +10,9 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.example.delphidisplays.model.User;
 import com.example.delphidisplays.retrofit.RetrofitService;
 import com.example.delphidisplays.retrofit.UserApi;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,11 +21,30 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
+
 public class signUpActivity extends AppCompatActivity {
 
-    EditText _fullName, _phone, _email, _password;
+
+    /**
+     * @param user_id
+     * @param first_name
+     * @param last_name
+     * @param email
+     * @param password
+     * @param calories
+     * @param total_fat
+     * @param saturated_fat
+     * @param sodium
+     * @param carbohydrates
+     * @param sugars
+     * @param protein
+     */
+
+
+    EditText _first_name, _last_name, _email, _password;
     Button _signup_btn;
-    SeekBar _beefSeekBar, _chkSeekBar, _spicySeekBar;
+    SeekBar calories_bar, total_fat_bar, saturated_fat_bar, sodium_bar, carb_bar, sugars_bar, protein_bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,15 +53,18 @@ public class signUpActivity extends AppCompatActivity {
 
         //wire up the the text fields with the above variables
 
-        _fullName = findViewById(R.id.fullName_input);
-        _phone = findViewById(R.id.phone_input);
+        _first_name = findViewById(R.id.first_name_input);
+        _last_name = findViewById(R.id.last_name_input);
         _email = findViewById(R.id.email_input);
         _password = findViewById(R.id.password_input);
 
-
-        _beefSeekBar = findViewById(R.id.beef_seekBar_input);
-        _chkSeekBar = findViewById(R.id.chicken_seekBar_input);
-        _spicySeekBar = findViewById(R.id.spicy_seekBar_input);
+        calories_bar = findViewById(R.id.calories_seekBar_input);
+        total_fat_bar = findViewById(R.id.total_fat_seekBar_input);
+        saturated_fat_bar = findViewById(R.id.saturated_fat_seekBar_input);
+        sodium_bar = findViewById(R.id.sodium_seekBar_input);
+        carb_bar = findViewById(R.id.carbohydrates_seekBar_input);
+        sugars_bar = findViewById(R.id.sugar_seekBar_input);
+        protein_bar = findViewById(R.id.protein_seekBar_input);
 
 
         _signup_btn = findViewById(R.id.submit_btn);
@@ -80,12 +92,12 @@ public class signUpActivity extends AppCompatActivity {
 
     //validate input fields here
     public boolean validateFullName() {
-        String fName = _fullName.getText().toString();
+        String fName = _first_name.getText().toString();
         if (fName.isEmpty()) {
-            _fullName.setError("fullName cannot be empty");
+            _first_name.setError("fullName cannot be empty");
             return false;
         } else {
-            _fullName.setError(null);
+            _first_name.setError(null);
             return true;
         }
     }
@@ -100,14 +112,18 @@ public class signUpActivity extends AppCompatActivity {
         System.out.println("kos called!");
 
         //pass the required variables to registerUser method in userApi
-        String fullName, phone, email, password, chicken, beef, spicy;
-        fullName = _fullName.getText().toString();
-        phone = _phone.getText().toString();
+        String first_name, last_name, email, password, calories, total_fat, saturated_fat, sodium, carbohydrates, sugars, protein;
+        first_name = _first_name.getText().toString();
+        last_name = _last_name.getText().toString();
         email = _email.getText().toString();
         password = _password.getText().toString();
-        beef = String.valueOf(_beefSeekBar.getProgress());
-        chicken = String.valueOf(_chkSeekBar.getProgress());
-        spicy = String.valueOf(_spicySeekBar.getProgress());
+        calories = String.valueOf(calories_bar.getProgress());
+        total_fat = String.valueOf(total_fat_bar.getProgress());
+        saturated_fat = String.valueOf(total_fat_bar.getProgress());
+        sodium = String.valueOf(sodium_bar.getProgress());
+        carbohydrates = String.valueOf(carb_bar.getProgress());
+        sugars = String.valueOf(sugars_bar.getProgress());
+        protein = String.valueOf(protein_bar.getProgress());
 
 
 
@@ -115,19 +131,23 @@ public class signUpActivity extends AppCompatActivity {
         RetrofitService retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
 
-        userApi.registerUser(fullName, phone, email, password, beef, chicken, spicy)
+        userApi.registerUser(first_name, last_name, email, password, calories, total_fat, saturated_fat, sodium, carbohydrates, sugars, protein)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         if(response.isSuccessful()) {
                             Toast.makeText(signUpActivity.this, "User Registration Successful!", Toast.LENGTH_LONG).show();
-                            _fullName.setText(null);
-                            _phone.setText(null);
+                            _first_name.setText(null);
+                            _last_name.setText(null);
                             _email.setText(null);
                             _password.setText(null);
-                            _beefSeekBar.setProgress(0);
-                            _chkSeekBar.setProgress(0);
-                            _spicySeekBar.setProgress(0);
+                            calories_bar.setProgress(0);
+                            total_fat_bar.setProgress(0);
+                            saturated_fat_bar.setProgress(0);
+                            sodium_bar.setProgress(0);
+                            carb_bar.setProgress(0);
+                            sugars_bar.setProgress(0);
+                            protein_bar.setProgress(0);
 
                         }else{
                             Toast.makeText(signUpActivity.this, "User Registration Failed!", Toast.LENGTH_LONG).show();

@@ -4,5 +4,6 @@
     <string name="sign_in_message">Already have an account? Login</string>
     <string name="sign_up_message">Don\'t have an account? Sign Up</string>
     <string name="pork_nameTag">pork</string>
+    <string name="ble_uuid">CDB7950D-73F1-4D4D-8E47-C090502DBD63</string>
 
 </resources>

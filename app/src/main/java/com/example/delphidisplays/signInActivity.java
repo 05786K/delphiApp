@@ -81,8 +81,8 @@ public class signInActivity extends AppCompatActivity {
                             //wire up data to user profile
                             Intent goToProfile = new Intent(signInActivity.this, userProfile.class);
 
-                            goToProfile.putExtra("fullName", user.getFullName());
-                            goToProfile.putExtra("phone", user.getPhone());
+                            goToProfile.putExtra("first_name", user.getFirst_name());
+                            goToProfile.putExtra("last_name", user.getLast_name());
                             goToProfile.putExtra("email", user.getEmail());
 
                             //start activity
