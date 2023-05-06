@@ -23,13 +23,17 @@ public interface UserApi {
     @FormUrlEncoded
     @POST("/delphi/register")
     Call<ResponseBody> registerUser(
-            @Field("fullName") String fullName,
-            @Field("phone") String phone,
+            @Field("first_name") String first_name,
+            @Field("last_name") String last_name,
             @Field("email") String email,
             @Field("password") String password,
-            @Field("beef") String beef,
-            @Field("chicken") String chicken,
-            @Field("spicy") String spicy
+            @Field("calories") String calories,
+            @Field("total_fat") String total_fat,
+            @Field("saturated_fat") String saturated_fat,
+            @Field("sodium") String sodium,
+            @Field("carbohydrates") String carbohydrates,
+            @Field("sugars") String sugars,
+            @Field("protein") String protein
 
     ); //userObject is send to REST
 

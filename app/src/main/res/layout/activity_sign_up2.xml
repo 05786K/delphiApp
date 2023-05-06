@@ -5,186 +5,208 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    tools:context=".signUpDummy"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="-51dp">
+
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="96dp"
+        android:layout_marginTop="16dp"
         android:text="Registration"
         android:textColor="@color/brown"
         android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.008" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/fullName_input"
+        android:id="@+id/first_name_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="12dp"
         android:ems="10"
-        android:hint="Full Name"
+        android:hint="First Name"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/textView3"></EditText>
 
     <EditText
-        android:id="@+id/phone_input"
+        android:id="@+id/last_name_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="Phone Number"
-        android:inputType="phone"
-        app:layout_constraintStart_toStartOf="@+id/fullName_input"
-        app:layout_constraintTop_toBottomOf="@+id/fullName_input" />
-
-    <EditText
-        android:id="@+id/email_input"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:ems="10"
-        android:hint="Email Address"
-        android:inputType="textEmailAddress"
-        app:layout_constraintStart_toStartOf="@+id/phone_input"
-        app:layout_constraintTop_toBottomOf="@+id/phone_input" />
+        android:hint="Last Name"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@+id/first_name_input"
+        app:layout_constraintTop_toBottomOf="@+id/first_name_input"></EditText>
 
     <EditText
         android:id="@+id/password_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="@+id/email_input"
-        app:layout_constraintTop_toBottomOf="@+id/email_input" />
-
-    <TextView
-        android:id="@+id/chicken_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Chicken: "
-        app:layout_constraintStart_toStartOf="@+id/beef_title"
-        app:layout_constraintTop_toBottomOf="@+id/beef_title" />
-
-    <SeekBar
-        android:id="@+id/chicken_seekBar_input"
-        android:layout_width="140dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="8dp"
-
-        android:max="10"
-        android:progress="0"
-        android:progressBackgroundTint="@color/brown"
-        android:progressTint="@color/brown"
-        android:scaleX="1.2"
-        android:scaleY="1.2"
-        android:thumbTint="@color/brown"
-        app:layout_constraintStart_toStartOf="@+id/beef_seekBar_input"
-        app:layout_constraintTop_toBottomOf="@+id/beef_seekBar_input" />
-
-    <TextView
-        android:id="@+id/spicy_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="@string/pork_nameTag"
-        app:layout_constraintStart_toStartOf="@+id/chicken_title"
-        app:layout_constraintTop_toBottomOf="@+id/chicken_title" />
-
-    <SeekBar
-        android:id="@+id/spicy_seekBar_input"
-        android:layout_width="140dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="6dp"
-        android:max="10"
-        android:progress="0"
-
-        android:progressBackgroundTint="@color/brown"
-        android:progressTint="@color/brown"
-        android:scaleX="1.2"
-        android:scaleY="1.2"
-        android:thumbTint="@color/brown"
-        app:layout_constraintStart_toStartOf="@+id/chicken_seekBar_input"
-        app:layout_constraintTop_toBottomOf="@+id/chicken_seekBar_input" />
-
-
-    <TextView
-        android:id="@+id/beef_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:text="Beef: "
-        app:layout_constraintStart_toStartOf="@+id/preferences_title"
-        app:layout_constraintTop_toBottomOf="@+id/preferences_title" />
-
-    <SeekBar
-        android:id="@+id/beef_seekBar_input"
-        android:layout_width="140dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="4dp"
-        android:max="10"
-        android:progress="0"
-
-        android:progressBackgroundTint="@color/brown"
-        android:progressTint="@color/brown"
-        android:scaleX="1.2"
-        android:scaleY="1.2"
-        android:thumbTint="@color/brown"
-        app:layout_constraintStart_toEndOf="@+id/beef_title"
-        app:layout_constraintTop_toBottomOf="@+id/preferences_title"
-
-
-        />
+        app:layout_constraintTop_toBottomOf="@+id/email_input"></EditText>
 
     <TextView
         android:id="@+id/preferences_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
+
+        android:layout_marginTop="15dp"
         android:text="Provide Preferences Below:"
-        app:layout_constraintStart_toStartOf="@+id/password_input"
+        app:layout_constraintStart_toStartOf="@+id/message1"
+        app:layout_constraintTop_toBottomOf="@+id/message1" />
 
-        app:layout_constraintTop_toBottomOf="@+id/password_input" />
-
-    <TextView
-        android:id="@+id/message1"
+    <EditText
+        android:id="@+id/email_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:gravity="center_horizontal"
-        android:onClick="goToSignIn"
-        android:text="@string/sign_in_message"
-        android:textAlignment="center"
-        android:textColor="@color/brown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.411"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spicy_seekBar_input" />
+        android:ems="10"
+        android:hint="Email Address"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="@+id/last_name_input"
+        app:layout_constraintTop_toBottomOf="@+id/last_name_input"></EditText>
 
-    <Button
-        android:id="@+id/submit_btn"
+
+    <TextView
+        android:id="@+id/calories_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:width="207dp"
-        android:height="40dp"
-        android:background="@drawable/btn_style"
-        android:padding="10dp"
-        android:text="SUBMIT"
-        app:layout_constraintStart_toStartOf="@+id/message1"
-        app:layout_constraintTop_toBottomOf="@+id/message1" />
+        android:layout_marginTop="8dp"
+        android:text="Calories: "
+        app:layout_constraintStart_toStartOf="@+id/preferences_title"
+        app:layout_constraintTop_toBottomOf="@+id/preferences_title" />
+
+
+    <SeekBar
+        android:id="@+id/calories_seekBar_input"
+        android:layout_width="140dp"
+        android:layout_height="18dp"
+
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="8dp"
+        android:max="10"
+        android:progress="0"
+        android:progressBackgroundTint="@color/brown"
+        android:progressTint="@color/brown"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:thumbTint="@color/brown"
+        app:layout_constraintStart_toEndOf="@+id/calories_title"
+        app:layout_constraintTop_toBottomOf="@+id/preferences_title" />
+
+    <TextView
+        android:id="@+id/total_fat_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Total Fat: "
+        app:layout_constraintStart_toStartOf="@+id/calories_title"
+        app:layout_constraintTop_toBottomOf="@+id/calories_title"></TextView>
+
+    <SeekBar
+        android:id="@+id/total_fat_seekBar_input"
+        android:layout_width="140dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="9dp"
+        android:max="10"
+
+        android:progress="0"
+        android:progressBackgroundTint="@color/brown"
+        android:progressTint="@color/brown"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:thumbTint="@color/brown"
+        app:layout_constraintStart_toStartOf="@+id/calories_seekBar_input"
+        app:layout_constraintTop_toBottomOf="@+id/calories_seekBar_input" />
+
+    <TextView
+        android:id="@+id/sodium_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Sodium: "
+        app:layout_constraintStart_toStartOf="@+id/saturated_fat_title"
+        app:layout_constraintTop_toBottomOf="@+id/saturated_fat_title" />
+
+    <SeekBar
+        android:id="@+id/sodium_seekBar_input"
+        android:layout_width="140dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="9dp"
+
+        android:max="10"
+        android:progress="0"
+        android:progressBackgroundTint="@color/brown"
+        android:progressTint="@color/brown"
+        android:scaleX="1.2"
+
+
+        android:scaleY="1.2"
+        android:thumbTint="@color/brown"
+        app:layout_constraintStart_toStartOf="@+id/saturated_fat_seekBar_input"
+        app:layout_constraintTop_toBottomOf="@+id/saturated_fat_seekBar_input" />
+
+    <TextView
+        android:id="@+id/saturated_fat_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Saturated:"
+        app:layout_constraintStart_toStartOf="@+id/total_fat_title"
+        app:layout_constraintTop_toBottomOf="@+id/total_fat_title"></TextView>
+
+    <SeekBar
+        android:id="@+id/saturated_fat_seekBar_input"
+        android:layout_width="140dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="8dp"
+        android:max="10"
+
+        android:progress="0"
+        android:progressBackgroundTint="@color/brown"
+        android:progressTint="@color/brown"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+        android:thumbTint="@color/brown"
+        app:layout_constraintStart_toStartOf="@+id/total_fat_seekBar_input"
+        app:layout_constraintTop_toBottomOf="@+id/total_fat_seekBar_input" />
+
+
+    <TextView
+        android:id="@+id/carbohydrates_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Carbs: "
+        app:layout_constraintStart_toStartOf="@+id/sodium_title"
+        app:layout_constraintTop_toBottomOf="@+id/sodium_title" />
+
+    <SeekBar
+        android:id="@+id/carbohydrates_seekBar_input"
+        android:layout_width="140dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="8dp"
+        android:max="10"
+
+        android:progress="0"
+        android:progressBackgroundTint="@color/brown"
+        android:progressTint="@color/brown"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+
+
+        android:thumbTint="@color/brown"
+        app:layout_constraintStart_toStartOf="@+id/sodium_seekBar_input"
+        app:layout_constraintTop_toBottomOf="@+id/sodium_seekBar_input" />
 
     <Button
         android:id="@+id/back_to_home_btn"
@@ -200,12 +222,94 @@
         app:layout_constraintStart_toStartOf="@+id/submit_btn"
         app:layout_constraintTop_toBottomOf="@+id/submit_btn" />
 
+    <TextView
+        android:id="@+id/message1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:onClick="goToSignIn"
+        android:text="@string/sign_in_message"
+        android:textAlignment="center"
+        android:textColor="@color/brown"
+        app:layout_constraintStart_toStartOf="@+id/password_input"
+        app:layout_constraintTop_toBottomOf="@+id/password_input" />
+
+
+    <TextView
+        android:id="@+id/sugars_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Sugar: "
+        app:layout_constraintStart_toStartOf="@+id/carbohydrates_title"
+        app:layout_constraintTop_toBottomOf="@+id/carbohydrates_title" />
+
+    <SeekBar
+        android:id="@+id/sugar_seekBar_input"
+        android:layout_width="140dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="8dp"
+
+        android:max="10"
+        android:progress="0"
+        android:progressBackgroundTint="@color/brown"
+        android:progressTint="@color/brown"
+        android:scaleX="1.2"
+
+
+        android:scaleY="1.2"
+        android:thumbTint="@color/brown"
+        app:layout_constraintStart_toStartOf="@+id/carbohydrates_seekBar_input"
+        app:layout_constraintTop_toBottomOf="@+id/carbohydrates_seekBar_input" />
+
+
+    <TextView
+        android:id="@+id/protein_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Protein: "
+        app:layout_constraintStart_toStartOf="@+id/sugars_title"
+        app:layout_constraintTop_toBottomOf="@+id/sugars_title" />
+
+    <SeekBar
+        android:id="@+id/protein_seekBar_input"
+        android:layout_width="140dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="8dp"
+        android:max="10"
+
+        android:progress="0"
+        android:progressBackgroundTint="@color/brown"
+        android:progressTint="@color/brown"
+        android:scaleX="1.2"
+        android:scaleY="1.2"
+
+
+        android:thumbTint="@color/brown"
+        app:layout_constraintStart_toStartOf="@+id/sugar_seekBar_input"
+        app:layout_constraintTop_toBottomOf="@+id/sugar_seekBar_input" />
+
+    <Button
+        android:id="@+id/submit_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:width="207dp"
+        android:height="40dp"
+        android:background="@drawable/btn_style"
+        android:padding="10dp"
+        android:text="SUBMIT"
+        app:layout_constraintStart_toStartOf="@+id/protein_title"
+        app:layout_constraintTop_toBottomOf="@+id/protein_seekBar_input" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="20dp" />
+        app:layout_constraintGuide_begin="124dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
@@ -251,6 +355,139 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline30"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline31"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
