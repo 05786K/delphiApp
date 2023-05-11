@@ -11,9 +11,11 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import com.example.delphidisplays.model.Preferences;
 import com.example.delphidisplays.retrofit.RetrofitService;
 import com.example.delphidisplays.retrofit.UserApi;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,7 +50,7 @@ public class signUpActivity extends AppCompatActivity {
     SeekBar calories_bar, total_fat_bar, saturated_fat_bar, sodium_bar, carb_bar, sugars_bar, protein_bar;
 
     //checkboxes
-    CheckBox nuts_checkbox;
+    CheckBox nuts_checkbox, vegan_checkbox, lactose_checkbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +73,9 @@ public class signUpActivity extends AppCompatActivity {
         protein_bar = findViewById(R.id.protein_seekBar_input);
 
 
-        //nuts_checkbox = findViewById(R.id.nuts_checkbox);
+        nuts_checkbox = findViewById(R.id.nuts_checkbox_input);
+        vegan_checkbox = findViewById(R.id.vegan_checkbox_input);
+        lactose_checkbox = findViewById(R.id.lactose_checkbox_input);
 
         _signup_btn = findViewById(R.id.submit_btn);
         _signup_btn.setOnClickListener(new View.OnClickListener() {
@@ -117,30 +121,36 @@ public class signUpActivity extends AppCompatActivity {
 
 
         //pass the required variables to registerUser method in userApi
-        String first_name, last_name, email, password, calories, total_fat, saturated_fat, sodium, carbohydrates, sugars, protein;
+        String first_name, last_name, email, password;
+        int calories, total_fat, saturated_fat, sodium, carbohydrates, sugars, protein;
+
         first_name = _first_name.getText().toString();
         last_name = _last_name.getText().toString();
         email = _email.getText().toString();
         password = _password.getText().toString();
-        calories = String.valueOf(calories_bar.getProgress());
-        total_fat = String.valueOf(total_fat_bar.getProgress());
-        saturated_fat = String.valueOf(total_fat_bar.getProgress());
-        sodium = String.valueOf(sodium_bar.getProgress());
-        carbohydrates = String.valueOf(carb_bar.getProgress());
-        sugars = String.valueOf(sugars_bar.getProgress());
-        protein = String.valueOf(protein_bar.getProgress());
+        calories = calories_bar.getProgress();
+        total_fat = total_fat_bar.getProgress();
+        saturated_fat = total_fat_bar.getProgress();
+        sodium = sodium_bar.getProgress();
+        carbohydrates = carb_bar.getProgress();
+        sugars = sugars_bar.getProgress();
+        protein = protein_bar.getProgress();
+
+        ArrayList<String> filters = new ArrayList<>();
+        if(nuts_checkbox.isChecked())
+            filters.add("nuts");
+        if(vegan_checkbox.isChecked())
+            filters.add("vegan");
+        if(lactose_checkbox.isChecked())
+            filters.add("lactose");
 
 
-        if(nuts_checkbox.isChecked()){
-            System.out.println("Nuts Allergy");
-        }else
-            System.out.println("Not enabled");
 
         //create a retrofit service, better keep these above user object
         RetrofitService retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
 
-        userApi.registerUser(first_name, last_name, email, password, calories, total_fat, saturated_fat, sodium, carbohydrates, sugars, protein)
+        userApi.registerUser(first_name, last_name, email, password, calories, total_fat, saturated_fat, sodium, carbohydrates, sugars, protein, filters)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -157,6 +167,10 @@ public class signUpActivity extends AppCompatActivity {
                             carb_bar.setProgress(0);
                             sugars_bar.setProgress(0);
                             protein_bar.setProgress(0);
+
+                            vegan_checkbox.setChecked(false);
+                            nuts_checkbox.setChecked(false);
+                            lactose_checkbox.setChecked(false);
 
                         }else{
                             Toast.makeText(signUpActivity.this, "User Registration Failed!", Toast.LENGTH_LONG).show();

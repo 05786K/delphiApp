@@ -5,36 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="-51dp">
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="32dp">
 
 
-    <!--    <CheckBox-->
-    <!--        android:id="@+id/nuts_checkbox9"-->
-    <!--        android:layout_width="77dp"-->
-    <!--        android:layout_height="32dp"-->
-    <!--        android:width="150dp"-->
-    <!--        android:text="Milk"-->
-    <!--        tools:layout_editor_absoluteX="96dp"-->
-    <!--        tools:layout_editor_absoluteY="599dp" />-->
+    <CheckBox
+        android:id="@+id/lactose_checkbox_input"
+        android:layout_width="105dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:width="150dp"
+        android:text="Lactose"
+        app:layout_constraintStart_toEndOf="@+id/nuts_checkbox_input"
+        app:layout_constraintTop_toBottomOf="@+id/preferences_title3" />
 
-    <!--    <CheckBox-->
-    <!--        android:id="@+id/nuts_checkbox10"-->
-    <!--        android:layout_width="77dp"-->
-    <!--        android:layout_height="32dp"-->
-    <!--        android:width="150dp"-->
-    <!--        android:text="Eggs"-->
-    <!--        tools:layout_editor_absoluteX="173dp"-->
-    <!--        tools:layout_editor_absoluteY="601dp" />-->
+    <CheckBox
+        android:id="@+id/nuts_checkbox_input"
+        android:layout_width="77dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:width="150dp"
+        android:text="Nuts"
+        app:layout_constraintStart_toEndOf="@+id/vegan_checkbox_input"
+        app:layout_constraintTop_toBottomOf="@+id/preferences_title3" />
 
-    <!--    <CheckBox-->
-    <!--        android:id="@+id/nuts_checkbox11"-->
-    <!--        android:layout_width="105dp"-->
-    <!--        android:layout_height="32dp"-->
-    <!--        android:width="150dp"-->
-    <!--        android:text="Lactose"-->
-    <!--        tools:layout_editor_absoluteX="250dp"-->
-    <!--        tools:layout_editor_absoluteY="601dp" />-->
+    <CheckBox
+        android:id="@+id/vegan_checkbox_input"
+        android:layout_width="77dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:width="150dp"
+        android:text="Vegan"
+        app:layout_constraintStart_toStartOf="@+id/preferences_title3"
+        app:layout_constraintTop_toBottomOf="@+id/preferences_title3" />
 
     <TextView
         android:id="@+id/textView3"
@@ -90,6 +93,16 @@
         android:text="Provide Preferences Below:"
         app:layout_constraintStart_toStartOf="@+id/message1"
         app:layout_constraintTop_toBottomOf="@+id/message1" />
+
+    <TextView
+        android:id="@+id/preferences_title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="28dp"
+        android:text="Check Food Allergies:"
+        app:layout_constraintStart_toStartOf="@+id/protein_title"
+        app:layout_constraintTop_toBottomOf="@+id/protein_title" />
 
     <EditText
         android:id="@+id/email_input"
@@ -306,23 +319,22 @@
 
     <Button
         android:id="@+id/submit_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_width="235dp"
+        android:layout_height="39dp"
         android:layout_marginTop="48dp"
         android:width="150dp"
         android:height="0dp"
         android:background="@drawable/btn_style"
         android:padding="10dp"
         android:text="SUBMIT"
-        app:layout_constraintStart_toStartOf="@+id/protein_title"
-        app:layout_constraintTop_toBottomOf="@+id/protein_title" />
+        app:layout_constraintStart_toStartOf="@+id/vegan_checkbox_input"
+        app:layout_constraintTop_toBottomOf="@+id/nuts_checkbox_input" />
 
     <Button
         android:id="@+id/back_to_home_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="234dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="48dp"
         android:width="150dp"
         android:height="20dp"
         android:background="@drawable/btn_style"
@@ -330,7 +342,7 @@
         android:padding="10dp"
         android:text="Back to Home"
         app:layout_constraintStart_toStartOf="@+id/submit_btn"
-        app:layout_constraintTop_toBottomOf="@+id/submit_btn" />
+        app:layout_constraintTop_toTopOf="@+id/submit_btn" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
@@ -340,44 +352,18 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
+        android:id="@+id/guideline19"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
+        android:id="@+id/guideline20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp" />
-
-    <!--    <CheckBox-->
-    <!--        android:id="@+id/nuts_checkbox"-->
-    <!--        android:layout_width="77dp"-->
-    <!--        android:layout_height="32dp"-->
-    <!--        android:width="150dp"-->
-    <!--        android:text="Nuts"-->
-    <!--        tools:layout_editor_absoluteX="96dp"-->
-    <!--        tools:layout_editor_absoluteY="567dp" />-->
-
-    <!--    <CheckBox-->
-    <!--        android:id="@+id/nuts_checkbox6"-->
-    <!--        android:layout_width="94dp"-->
-    <!--        android:layout_height="34dp"-->
-    <!--        android:text="Chicken"-->
-    <!--        tools:layout_editor_absoluteX="173dp"-->
-    <!--        tools:layout_editor_absoluteY="567dp" />-->
-
-    <!--    <CheckBox-->
-    <!--        android:id="@+id/nuts_checkbox7"-->
-    <!--        android:layout_width="77dp"-->
-    <!--        android:layout_height="32dp"-->
-    <!--        android:width="150dp"-->
-    <!--        android:text="Pork"-->
-    <!--        tools:layout_editor_absoluteX="267dp"-->
-    <!--        tools:layout_editor_absoluteY="567dp" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

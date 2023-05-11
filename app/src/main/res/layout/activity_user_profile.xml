@@ -42,7 +42,7 @@
         app:layout_constraintTop_toBottomOf="@+id/first_name_tv" />
 
     <EditText
-        android:id="@+id/phone_tv"
+        android:id="@+id/user_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -70,8 +70,8 @@
         android:background="@drawable/btn_style"
         android:padding="10dp"
         android:text="SIGN OUT"
-        app:layout_constraintStart_toStartOf="@+id/phone_tv"
-        app:layout_constraintTop_toBottomOf="@+id/phone_tv" />
+        app:layout_constraintStart_toStartOf="@+id/user_tv"
+        app:layout_constraintTop_toBottomOf="@+id/user_tv" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"

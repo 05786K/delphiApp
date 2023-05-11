@@ -36,10 +36,10 @@ import java.util.UUID;
 
 public class userProfile extends AppCompatActivity {
 
-    TextView first_name, email, phone;
+    TextView first_name, email, user_id;
     Button signOut_btn;
 
-    Button advertise_btn, scanner_btn;
+    Button advertise_btn;
     TextView resultBox;
 
     BluetoothLeScanner mBluetoothLeScanner;
@@ -51,27 +51,25 @@ public class userProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-
-
         //wire up text view and button objects with backend
         first_name = findViewById(R.id.first_name_tv);
         email = findViewById(R.id.email_tv);
-        phone = findViewById(R.id.phone_tv);
+        user_id = findViewById(R.id.user_tv);
 
         //Get Values
         String first_name_value = getIntent().getStringExtra("first_name");
         String email_value = getIntent().getStringExtra("email");
-        String phone_value = getIntent().getStringExtra("phone");
+        String user_id_value = getIntent().getStringExtra("user_id");
 
+        System.out.println("user id value: " + user_id_value);
         //set text view profile values
         first_name.setText(first_name_value);
         email.setText(email_value);
-        phone.setText(phone_value);
+        user_id.setText(user_id_value);
         signOut_btn = findViewById(R.id.logout_btn);
 
         //BLE stuff
         advertise_btn = findViewById(R.id.advertise_btn);
-
 
 
         signOut_btn.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +96,7 @@ public class userProfile extends AppCompatActivity {
         //reset fields in the profile to null
         first_name.setText(null);
         email.setText(null);
-        phone.setText(null);
+        user_id.setText(null);
 
         //return back to home pack
         Intent goToHome = new Intent(userProfile.this, MainActivity.class);
