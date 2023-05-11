@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Toast;
@@ -46,6 +47,9 @@ public class signUpActivity extends AppCompatActivity {
     Button _signup_btn;
     SeekBar calories_bar, total_fat_bar, saturated_fat_bar, sodium_bar, carb_bar, sugars_bar, protein_bar;
 
+    //checkboxes
+    CheckBox nuts_checkbox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +70,8 @@ public class signUpActivity extends AppCompatActivity {
         sugars_bar = findViewById(R.id.sugar_seekBar_input);
         protein_bar = findViewById(R.id.protein_seekBar_input);
 
+
+        //nuts_checkbox = findViewById(R.id.nuts_checkbox);
 
         _signup_btn = findViewById(R.id.submit_btn);
         _signup_btn.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +115,6 @@ public class signUpActivity extends AppCompatActivity {
             return;
         }
 
-        System.out.println("kos called!");
 
         //pass the required variables to registerUser method in userApi
         String first_name, last_name, email, password, calories, total_fat, saturated_fat, sodium, carbohydrates, sugars, protein;
@@ -126,6 +131,10 @@ public class signUpActivity extends AppCompatActivity {
         protein = String.valueOf(protein_bar.getProgress());
 
 
+        if(nuts_checkbox.isChecked()){
+            System.out.println("Nuts Allergy");
+        }else
+            System.out.println("Not enabled");
 
         //create a retrofit service, better keep these above user object
         RetrofitService retrofitService = new RetrofitService();

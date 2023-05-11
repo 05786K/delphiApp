@@ -50,25 +50,15 @@
         app:layout_constraintStart_toStartOf="@+id/email_tv"
         app:layout_constraintTop_toBottomOf="@+id/email_tv" />
 
+
     <Button
         android:id="@+id/advertise_btn"
         android:layout_width="207dp"
         android:layout_height="40dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="148dp"
         android:background="@drawable/btn_style"
         android:padding="10dp"
         android:text="Advertise"
-        app:layout_constraintStart_toStartOf="@+id/scanner_btn"
-        app:layout_constraintTop_toBottomOf="@+id/scanner_btn" />
-
-    <Button
-        android:id="@+id/scanner_btn"
-        android:layout_width="207dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="28dp"
-        android:background="@drawable/btn_style"
-        android:padding="10dp"
-        android:text="Scan"
         app:layout_constraintStart_toStartOf="@+id/logout_btn"
         app:layout_constraintTop_toBottomOf="@+id/logout_btn" />
 
@@ -76,7 +66,7 @@
         android:id="@+id/logout_btn"
         android:layout_width="207dp"
         android:layout_height="40dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="120dp"
         android:background="@drawable/btn_style"
         android:padding="10dp"
         android:text="SIGN OUT"
@@ -125,14 +115,26 @@
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp" />
 
-    <TextView
-        android:id="@+id/results_textview"
-        android:layout_width="201dp"
-        android:layout_height="134dp"
-        android:layout_marginTop="24dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/advertise_btn"
-        app:layout_constraintTop_toBottomOf="@+id/advertise_btn" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline35"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -51,7 +51,8 @@ public class userProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
 
-        System.out.println("---->Came to userProfile----->");
+
+
         //wire up text view and button objects with backend
         first_name = findViewById(R.id.first_name_tv);
         email = findViewById(R.id.email_tv);
@@ -70,8 +71,7 @@ public class userProfile extends AppCompatActivity {
 
         //BLE stuff
         advertise_btn = findViewById(R.id.advertise_btn);
-        scanner_btn = findViewById(R.id.scanner_btn);
-        resultBox = findViewById(R.id.results_textview);
+
 
 
         signOut_btn.setOnClickListener(new View.OnClickListener() {
@@ -90,17 +90,8 @@ public class userProfile extends AppCompatActivity {
             }
         });
 
-        scanner_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                scan();
-            }
-        });
 
-
-        //scan call for scanner
-
-
+        //advertise();
     }
 
     public void signUserOut() {
@@ -118,46 +109,53 @@ public class userProfile extends AppCompatActivity {
     }
 
     public void advertise() {
-        Toast.makeText(this, "Advertising Started", Toast.LENGTH_LONG).show();
-        BluetoothManager bluetoothManager = getSystemService(BluetoothManager.class);
-        BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
+
+        BluetoothManager myBluetoothManager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
+        BluetoothAdapter myBluetoothAdapter = myBluetoothManager.getAdapter();
+
 
         // check if device supports bluetooth
-        if (bluetoothAdapter == null) {
-            Toast.makeText(this, "Bluetooth Is Not Supported!", Toast.LENGTH_SHORT).show();
+        if (myBluetoothAdapter == null || !myBluetoothAdapter.isEnabled()) {
+            Toast.makeText(this, "Bluetooth Is Not Supported OR not enabled!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH_LE)) {
+            Toast.makeText(this, "Bluetooth Is Not Supported OR not enabled!", Toast.LENGTH_LONG).show();
             return;
         }
 
         // check if multiple advertisements supported
-//        if (!bluetoothAdapter.isMultipleAdvertisementSupported()){
-//            Toast.makeText( this, "Multiple advertisement not supported", Toast.LENGTH_SHORT ).show();
-//            return;
-//        }
+        if (!myBluetoothAdapter.isMultipleAdvertisementSupported()){
+            Toast.makeText( this, "Multiple advertisement not supported", Toast.LENGTH_SHORT ).show();
+            return;
+        }
+
 
         //create advertiser and config settings
-        BluetoothLeAdvertiser advertiser = bluetoothAdapter.getBluetoothLeAdvertiser();
+        BluetoothLeAdvertiser advertiser = myBluetoothAdapter.getBluetoothLeAdvertiser();
         AdvertiseSettings settings = new AdvertiseSettings.Builder()
-                .setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_LATENCY)
-                .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
+                .setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_BALANCED)
                 .setConnectable(true)
+                .setTimeout(0)
+                .setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_HIGH)
                 .build();
 
         //new UUID
-        //String uuID = UUID.randomUUID().toString();
         ParcelUuid pUuid = new ParcelUuid(UUID.fromString(getString(R.string.ble_uuid)));
 
         //create data packet?
         AdvertiseData data = new AdvertiseData.Builder()
-                //.setIncludeDeviceName( true )
-                .addServiceUuid(pUuid)
-                //.addServiceData( pUuid, "Data".getBytes( Charset.forName( "UTF-8" ) ) )
+                .setIncludeDeviceName(true)
+                //.addServiceUuid(new ParcelUuid(bleUUID))
                 .build();
 
-        //A callback is supposed to record success/failure
+        //A callback to record success/failure
         AdvertiseCallback advertisingCallback = new AdvertiseCallback() {
             @Override
             public void onStartSuccess(AdvertiseSettings settingsInEffect) {
                 super.onStartSuccess(settingsInEffect);
+                Log.e("BLE", "Advertising successfully started!");
             }
 
             @Override
@@ -179,98 +177,6 @@ public class userProfile extends AppCompatActivity {
             return;
         }
         advertiser.startAdvertising(settings, data, advertisingCallback);
-        System.out.println("advertising started...");
     }
 
-    public void scan() {
-        System.out.println("Scan fundtion called!!!");
-        mBluetoothLeScanner = BluetoothAdapter.getDefaultAdapter().getBluetoothLeScanner();
-
-//        if( !BluetoothAdapter.getDefaultAdapter().isMultipleAdvertisementSupported() ) {
-//            Toast.makeText( this, "Multiple advertisement not supported", Toast.LENGTH_SHORT ).show();
-//        }
-
-
-
-        List<ScanFilter> filters = new ArrayList<ScanFilter>();
-
-        ScanFilter filter = new ScanFilter.Builder()
-                .setServiceUuid(new ParcelUuid(UUID.fromString(getString(R.string.ble_uuid))))
-                .build();
-
-        filters.add(filter);
-
-        ScanSettings settings = new ScanSettings.Builder()
-                .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
-                .build();
-
-
-        //create scan call back
-
-        ScanCallback mScanCallback = new ScanCallback() {
-            @SuppressLint("MissingPermission")
-            @Override
-            public void onScanResult(int callbackType, ScanResult result) {
-                System.out.println("Entered mScanCallBack");
-                super.onScanResult(callbackType, result);
-
-                if (result == null || result.getDevice() == null || TextUtils.isEmpty(result.getDevice().getName())){
-                    System.out.println("result is null");
-                    return;
-                }
-
-                StringBuilder builder = new StringBuilder(result.getDevice().getName());
-
-                builder.append("\n").append(new String(result.getScanRecord().getServiceData(result.getScanRecord().getServiceUuids().get(0)), Charset.forName("UTF-8")));
-
-                resultBox.setText("The result is: " + builder.toString());
-            }
-
-            @Override
-            public void onBatchScanResults(List<ScanResult> results) {
-                super.onBatchScanResults(results);
-            }
-
-            @Override
-            public void onScanFailed(int errorCode) {
-                Log.e("BLE", "Discovery onScanFailed: " + errorCode);
-                super.onScanFailed(errorCode);
-            }
-        };
-
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        if(mScanCallback == null || filter == null || settings == null)
-            System.out.println("mScancallBack is null");
-        else
-            System.out.println("mscancallback is fine");
-
-        mBluetoothLeScanner.startScan(filters, settings, mScanCallback);
-
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (ActivityCompat.checkSelfPermission(userProfile.this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
-                }
-                mBluetoothLeScanner.stopScan(mScanCallback);
-            }
-        }, 10000);
-    }
 }
