@@ -1,5 +1,6 @@
 package com.example.delphidisplays.retrofit;
 
+import com.example.delphidisplays.model.LoginInfo;
 import com.example.delphidisplays.model.User;
 
 import java.util.ArrayList;
@@ -12,12 +13,16 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 
 public interface UserApi {
+    /*
     @FormUrlEncoded
     @POST("/delphi/users/login")
     Call<User> loginUser(
             @Field("email") String email,
             @Field("password") String password
-    );
+    );*/
+
+    @POST("delphi/users/login")
+    Call<User> loginUser(@Body LoginInfo login);
 
 
     //register user endpoint
