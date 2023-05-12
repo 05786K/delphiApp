@@ -5,9 +5,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray"
-    tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="-51dp">
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="32dp">
 
+
+    <CheckBox
+        android:id="@+id/lactose_checkbox_input"
+        android:layout_width="105dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:width="150dp"
+        android:text="Lactose"
+        app:layout_constraintStart_toEndOf="@+id/nuts_checkbox_input"
+        app:layout_constraintTop_toBottomOf="@+id/preferences_title3" />
+
+    <CheckBox
+        android:id="@+id/nuts_checkbox_input"
+        android:layout_width="77dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:width="150dp"
+        android:text="Nuts"
+        app:layout_constraintStart_toEndOf="@+id/vegan_checkbox_input"
+        app:layout_constraintTop_toBottomOf="@+id/preferences_title3" />
+
+    <CheckBox
+        android:id="@+id/vegan_checkbox_input"
+        android:layout_width="77dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="16dp"
+        android:width="150dp"
+        android:text="Vegan"
+        app:layout_constraintStart_toStartOf="@+id/preferences_title3"
+        app:layout_constraintTop_toBottomOf="@+id/preferences_title3" />
 
     <TextView
         android:id="@+id/textView3"
@@ -63,6 +93,16 @@
         android:text="Provide Preferences Below:"
         app:layout_constraintStart_toStartOf="@+id/message1"
         app:layout_constraintTop_toBottomOf="@+id/message1" />
+
+    <TextView
+        android:id="@+id/preferences_title3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="28dp"
+        android:text="Check Food Allergies:"
+        app:layout_constraintStart_toStartOf="@+id/protein_title"
+        app:layout_constraintTop_toBottomOf="@+id/protein_title" />
 
     <EditText
         android:id="@+id/email_input"
@@ -208,20 +248,6 @@
         app:layout_constraintStart_toStartOf="@+id/sodium_seekBar_input"
         app:layout_constraintTop_toBottomOf="@+id/sodium_seekBar_input" />
 
-    <Button
-        android:id="@+id/back_to_home_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:width="207dp"
-        android:height="40dp"
-        android:background="@drawable/btn_style"
-        android:onClick="goToHome"
-        android:padding="10dp"
-        android:text="Back to Home"
-        app:layout_constraintStart_toStartOf="@+id/submit_btn"
-        app:layout_constraintTop_toBottomOf="@+id/submit_btn" />
-
     <TextView
         android:id="@+id/message1"
         android:layout_width="wrap_content"
@@ -293,103 +319,33 @@
 
     <Button
         android:id="@+id/submit_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:width="207dp"
-        android:height="40dp"
+        android:layout_width="235dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="48dp"
+        android:width="150dp"
+        android:height="0dp"
         android:background="@drawable/btn_style"
         android:padding="10dp"
         android:text="SUBMIT"
-        app:layout_constraintStart_toStartOf="@+id/protein_title"
-        app:layout_constraintTop_toBottomOf="@+id/protein_seekBar_input" />
+        app:layout_constraintStart_toStartOf="@+id/vegan_checkbox_input"
+        app:layout_constraintTop_toBottomOf="@+id/nuts_checkbox_input" />
+
+    <Button
+        android:id="@+id/back_to_home_btn"
+        android:layout_width="234dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="48dp"
+        android:width="150dp"
+        android:height="20dp"
+        android:background="@drawable/btn_style"
+        android:onClick="goToHome"
+        android:padding="10dp"
+        android:text="Back to Home"
+        app:layout_constraintStart_toStartOf="@+id/submit_btn"
+        app:layout_constraintTop_toTopOf="@+id/submit_btn" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="124dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline50"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline51"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline52"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline54"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline15"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline17"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline18"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -404,90 +360,6 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline20"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline21"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline27"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline29"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline30"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline31"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline32"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

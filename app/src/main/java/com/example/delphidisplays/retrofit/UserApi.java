@@ -1,6 +1,9 @@
 package com.example.delphidisplays.retrofit;
 
+import com.example.delphidisplays.model.Preferences;
 import com.example.delphidisplays.model.User;
+
+import java.util.ArrayList;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -12,7 +15,7 @@ import retrofit2.http.POST;
 
 public interface UserApi {
     @FormUrlEncoded
-    @POST("/delphi/login")
+    @POST("/delphi/users/login")
     Call<User> loginUser(
             @Field("email") String email,
             @Field("password") String password
@@ -21,20 +24,23 @@ public interface UserApi {
 
     //register user endpoint
     @FormUrlEncoded
-    @POST("/delphi/register")
+    @POST("/delphi/users/register")
     Call<ResponseBody> registerUser(
             @Field("first_name") String first_name,
             @Field("last_name") String last_name,
             @Field("email") String email,
             @Field("password") String password,
-            @Field("calories") String calories,
-            @Field("total_fat") String total_fat,
-            @Field("saturated_fat") String saturated_fat,
-            @Field("sodium") String sodium,
-            @Field("carbohydrates") String carbohydrates,
-            @Field("sugars") String sugars,
-            @Field("protein") String protein
+            @Field("calories") int calories,
+            @Field("total_fat") int total_fat,
+            @Field("saturated_fat") int saturated_fat,
+            @Field("sodium") int sodium,
+            @Field("carbohydrates") int carbohydrates,
+            @Field("sugars") int sugars,
+            @Field("protein") int protein,
+            @Field("filters") ArrayList<String> filters
 
-    ); //userObject is send to REST
+            ); //userObject is send to REST  @FormUrlEncoded
+
+
 
 }
