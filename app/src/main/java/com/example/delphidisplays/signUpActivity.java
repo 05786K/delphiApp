@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 import android.widget.Toast;
 
 import com.example.delphidisplays.model.Preferences;
+import com.example.delphidisplays.model.User;
 import com.example.delphidisplays.retrofit.RetrofitService;
 import com.example.delphidisplays.retrofit.UserApi;
 
@@ -150,7 +151,11 @@ public class signUpActivity extends AppCompatActivity {
         RetrofitService retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
 
-        userApi.registerUser(first_name, last_name, email, password, calories, total_fat, saturated_fat, sodium, carbohydrates, sugars, protein, filters)
+        Preferences user_preferences = new Preferences(calories,
+                total_fat, saturated_fat, sodium, carbohydrates, sugars, protein);
+
+        User user = new User(first_name, last_name, email, password, user_preferences, filters);
+        userApi.registerUser(user)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
