@@ -2,8 +2,22 @@ package com.example.delphidisplays;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothManager;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.core.app.ActivityCompat;
+
+import android.bluetooth.le.AdvertiseCallback;
+import android.bluetooth.le.AdvertiseData;
+import android.bluetooth.le.AdvertiseSettings;
+import android.bluetooth.le.BluetoothLeAdvertiser;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.ParcelUuid;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +32,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.delphidisplays.model.LoginInfo;
 import com.example.delphidisplays.model.User;
 import com.example.delphidisplays.retrofit.RetrofitService;
 import com.example.delphidisplays.retrofit.UserApi;
@@ -25,8 +40,10 @@ import com.example.delphidisplays.retrofit.UserApi;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -70,24 +87,33 @@ public class signInActivity extends AppCompatActivity {
         RetrofitService retrofitService = new RetrofitService();
         UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
 
+        LoginInfo login = new LoginInfo(email, password);
 
-        userApi.loginUser(email, password)
+        userApi.loginUser(login)
                 .enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, retrofit2.Response<User> response) {
                         if(response.isSuccessful()){
                             User user = response.body();
 
-                            //wire up data to user profile
-                            Intent goToProfile = new Intent(signInActivity.this, userProfile.class);
+                            if (user != null)
+                            {
+                                //wire up data to user profile
+                                Intent goToProfile = new Intent(signInActivity.this, userProfile.class);
 
-                            goToProfile.putExtra("first_name", user.getFirst_name());
-                            goToProfile.putExtra("user_id", user.getUser_id());
-                            goToProfile.putExtra("email", user.getEmail());
+                                goToProfile.putExtra("first_name", user.getFirst_name());
+                                goToProfile.putExtra("user_id", user.getUser_id());
+                                goToProfile.putExtra("email", user.getEmail());
 
-                            //start activity
-                            startActivity(goToProfile);
-                            finish();
+                                //start activity
+                                startActivity(goToProfile);
+                                finish();
+                            }
+                            else
+                            {
+                                Toast.makeText(signInActivity.this, "Wrong Email or Password", Toast.LENGTH_LONG).show();
+                            }
+
                         }else{
                             Toast.makeText(signInActivity.this, "User Login Failed!", Toast.LENGTH_LONG).show();
 
