@@ -16,6 +16,7 @@
         android:layout_marginTop="16dp"
         android:width="150dp"
         android:text="Lactose"
+        android:textColor="@color/brown"
         app:layout_constraintStart_toEndOf="@+id/nuts_checkbox_input"
         app:layout_constraintTop_toBottomOf="@+id/preferences_title3" />
 
@@ -26,6 +27,7 @@
         android:layout_marginTop="16dp"
         android:width="150dp"
         android:text="Nuts"
+        android:textColor="@color/brown"
         app:layout_constraintStart_toEndOf="@+id/vegan_checkbox_input"
         app:layout_constraintTop_toBottomOf="@+id/preferences_title3" />
 
@@ -36,18 +38,20 @@
         android:layout_marginTop="16dp"
         android:width="150dp"
         android:text="Vegan"
+        android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="@+id/preferences_title3"
         app:layout_constraintTop_toBottomOf="@+id/preferences_title3" />
 
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="242dp"
+        android:layout_height="57dp"
         android:layout_marginStart="96dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="4dp"
         android:text="Registration"
         android:textColor="@color/brown"
         android:textSize="40dp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -55,10 +59,12 @@
         android:id="@+id/first_name_input"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="22dp"
         android:ems="10"
         android:hint="First Name"
         android:inputType="textPersonName"
+        android:textColorHint="@color/brown"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/textView3"></EditText>
 
@@ -69,6 +75,8 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Last Name"
+        android:textColorHint="@color/brown"
+        android:textStyle="bold"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@+id/first_name_input"
         app:layout_constraintTop_toBottomOf="@+id/first_name_input"></EditText>
@@ -81,6 +89,8 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:textColorHint="@color/brown"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/email_input"
         app:layout_constraintTop_toBottomOf="@+id/email_input"></EditText>
 
@@ -91,6 +101,7 @@
 
         android:layout_marginTop="15dp"
         android:text="Provide Preferences Below:"
+        android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="@+id/message1"
         app:layout_constraintTop_toBottomOf="@+id/message1" />
 
@@ -101,6 +112,7 @@
 
         android:layout_marginTop="28dp"
         android:text="Check Food Allergies:"
+        android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="@+id/protein_title"
         app:layout_constraintTop_toBottomOf="@+id/protein_title" />
 
@@ -111,6 +123,8 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Email Address"
+        android:textColorHint="@color/brown"
+        android:textStyle="bold"
         android:inputType="textEmailAddress"
         app:layout_constraintStart_toStartOf="@+id/last_name_input"
         app:layout_constraintTop_toBottomOf="@+id/last_name_input"></EditText>
@@ -122,6 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Calories: "
+        android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="@+id/preferences_title"
         app:layout_constraintTop_toBottomOf="@+id/preferences_title" />
 
@@ -149,6 +164,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Total Fat: "
+        android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="@+id/calories_title"
         app:layout_constraintTop_toBottomOf="@+id/calories_title"></TextView>
 
@@ -174,6 +190,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Sodium: "
+        android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="@+id/saturated_fat_title"
         app:layout_constraintTop_toBottomOf="@+id/saturated_fat_title" />
 
@@ -201,6 +218,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Saturated:"
+        android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="@+id/total_fat_title"
         app:layout_constraintTop_toBottomOf="@+id/total_fat_title"></TextView>
 
@@ -227,6 +245,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Carbs: "
+        android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="@+id/sodium_title"
         app:layout_constraintTop_toBottomOf="@+id/sodium_title" />
 
@@ -268,6 +287,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Sugar: "
+        android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="@+id/carbohydrates_title"
         app:layout_constraintTop_toBottomOf="@+id/carbohydrates_title" />
 
@@ -296,6 +316,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Protein: "
+        android:textColor="@color/brown"
         app:layout_constraintStart_toStartOf="@+id/sugars_title"
         app:layout_constraintTop_toBottomOf="@+id/sugars_title" />
 
