@@ -31,7 +31,7 @@ public class signUpActivity extends AppCompatActivity {
 
 
     /**
-     * @param user_id
+     * @param userId
      * @param first_name
      * @param last_name
      * @param email

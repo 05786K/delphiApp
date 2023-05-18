@@ -2,52 +2,18 @@ package com.example.delphidisplays;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothManager;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.core.app.ActivityCompat;
-
-import android.bluetooth.le.AdvertiseCallback;
-import android.bluetooth.le.AdvertiseData;
-import android.bluetooth.le.AdvertiseSettings;
-import android.bluetooth.le.BluetoothLeAdvertiser;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.ParcelUuid;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.delphidisplays.model.LoginInfo;
 import com.example.delphidisplays.model.User;
 import com.example.delphidisplays.retrofit.RetrofitService;
 import com.example.delphidisplays.retrofit.UserApi;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 
@@ -102,7 +68,8 @@ public class signInActivity extends AppCompatActivity {
                                 Intent goToProfile = new Intent(signInActivity.this, userProfile.class);
 
                                 goToProfile.putExtra("first_name", user.getFirst_name());
-                                goToProfile.putExtra("user_id", user.getUser_id());
+                                goToProfile.putExtra("last_name", user.getLast_name());
+                                goToProfile.putExtra("userId", user.getUserId());
                                 goToProfile.putExtra("email", user.getEmail());
 
                                 //start activity

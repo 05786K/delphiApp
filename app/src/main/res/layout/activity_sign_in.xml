@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:text="Login"
+        android:textStyle="bold"
         android:textColor="@color/brown"
         android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,6 +32,8 @@
         android:ems="10"
         android:hint="Email Address"
         android:inputType="textEmailAddress"
+        android:backgroundTint="@color/brown"
+        android:backgroundTintMode="add"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
@@ -42,6 +45,8 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:backgroundTint="@color/brown"
+        android:backgroundTintMode="add"
         app:layout_constraintStart_toStartOf="@+id/email_input"
         app:layout_constraintTop_toBottomOf="@+id/email_input" />
 
@@ -54,7 +59,8 @@
         android:onClick="goToSignUpActivity"
         android:text="@string/sign_up_message"
         android:textAlignment="center"
-        android:textColor="@color/brown"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/password_input"
         app:layout_constraintTop_toBottomOf="@+id/password_input" />
 

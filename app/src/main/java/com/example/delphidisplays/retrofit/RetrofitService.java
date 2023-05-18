@@ -15,7 +15,7 @@ public class RetrofitService {
 
     private void initializeRetrofit() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://11.22.35.14:8080")
+                .baseUrl("http://ec2-13-57-39-29.us-west-1.compute.amazonaws.com:8080")
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
                 .build();
     }

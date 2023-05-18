@@ -6,6 +6,10 @@ import androidx.core.app.ActivityCompat;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattServer;
+import android.bluetooth.BluetoothGattServerCallback;
+import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.AdvertiseCallback;
 import android.bluetooth.le.AdvertiseData;
@@ -29,6 +33,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -36,14 +42,18 @@ import java.util.UUID;
 
 public class userProfile extends AppCompatActivity {
 
-    TextView first_name, email, user_id;
+    TextView first_name, last_name, email, userId;
     Button signOut_btn;
 
     Button advertise_btn;
     TextView resultBox;
 
-    BluetoothLeScanner mBluetoothLeScanner;
-    Handler mHandler = new Handler();
+    BluetoothManager myBluetoothManager;
+    BluetoothAdapter myBluetoothAdapter;
+
+    private static final String SERVICE_UUID = "00001111-0000-1000-8000-00805F9B34FB";
+    private static final String CHARACTERISTIC_UUID = "00002222-0000-1000-8000-00805F9B34FB";
+    BluetoothGattServer gattServer;
 
 
     @Override
@@ -54,18 +64,18 @@ public class userProfile extends AppCompatActivity {
         //wire up text view and button objects with backend
         first_name = findViewById(R.id.first_name_tv);
         email = findViewById(R.id.email_tv);
-        user_id = findViewById(R.id.user_tv);
+        userId = findViewById(R.id.user_tv);
 
         //Get Values
         String first_name_value = getIntent().getStringExtra("first_name");
+        String last_name_value = getIntent().getStringExtra("last_name");
         String email_value = getIntent().getStringExtra("email");
-        String user_id_value = getIntent().getStringExtra("user_id");
+        String userId_value = getIntent().getStringExtra("userId");
 
-        System.out.println("user id value: " + user_id_value);
         //set text view profile values
-        first_name.setText(first_name_value);
+        first_name.setText(first_name_value + " " + last_name_value);
         email.setText(email_value);
-        user_id.setText(user_id_value);
+        userId.setText(userId_value);
         signOut_btn = findViewById(R.id.logout_btn);
 
         //BLE stuff
@@ -85,6 +95,7 @@ public class userProfile extends AppCompatActivity {
             public void onClick(View v) {
                 //call advertise function
                 advertise();
+
             }
         });
 
@@ -92,11 +103,15 @@ public class userProfile extends AppCompatActivity {
         //advertise();
     }
 
+    @SuppressLint("MissingPermission")
     public void signUserOut() {
         //reset fields in the profile to null
         first_name.setText(null);
         email.setText(null);
-        user_id.setText(null);
+        userId.setText(null);
+
+        if(gattServer != null)
+            gattServer.close();
 
         //return back to home pack
         Intent goToHome = new Intent(userProfile.this, MainActivity.class);
@@ -106,10 +121,55 @@ public class userProfile extends AppCompatActivity {
 
     }
 
+    @SuppressLint("MissingPermission")
+    private void initializeGattServer() {
+
+        gattServer = myBluetoothManager.openGattServer(this, gattServerCallback);
+        BluetoothGattService service = new BluetoothGattService(
+                UUID.fromString(SERVICE_UUID),
+                BluetoothGattService.SERVICE_TYPE_PRIMARY
+        );
+
+        BluetoothGattCharacteristic characteristic = new BluetoothGattCharacteristic(
+                UUID.fromString(CHARACTERISTIC_UUID),
+                BluetoothGattCharacteristic.PROPERTY_READ | BluetoothGattCharacteristic.PROPERTY_NOTIFY,
+                BluetoothGattCharacteristic.PERMISSION_READ
+        );
+
+
+        service.addCharacteristic(characteristic);
+        gattServer.addService(service);
+    }
+
+    private final BluetoothGattServerCallback gattServerCallback = new BluetoothGattServerCallback() {
+        @SuppressLint("MissingPermission")
+        @Override
+        public void onCharacteristicReadRequest(
+                android.bluetooth.BluetoothDevice device,
+                int requestId,
+                int offset,
+                BluetoothGattCharacteristic characteristic
+        ) {
+            if (offset != 0) {
+                //gattServer.sendResponse(device, requestId, BluetoothGattCharacteristic.RESULT_INVALID_OFFSET, offset, null);
+                return;
+            }
+
+            //get userID value
+            String userId_value = getIntent().getStringExtra("userId");
+
+            String userInfo = "User ID # " + userId_value;
+            byte[] valueBytes = userInfo.getBytes();
+            characteristic.setValue(valueBytes);
+            gattServer.notifyCharacteristicChanged(device, characteristic, false);
+
+        }
+    };
+    @SuppressLint("MissingPermission")
     public void advertise() {
 
-        BluetoothManager myBluetoothManager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
-        BluetoothAdapter myBluetoothAdapter = myBluetoothManager.getAdapter();
+        myBluetoothManager = (BluetoothManager) getSystemService(BLUETOOTH_SERVICE);
+        myBluetoothAdapter = myBluetoothManager.getAdapter();
 
 
         // check if device supports bluetooth
@@ -145,7 +205,7 @@ public class userProfile extends AppCompatActivity {
         //create data packet?
         AdvertiseData data = new AdvertiseData.Builder()
                 .setIncludeDeviceName(true)
-                //.addServiceUuid(new ParcelUuid(bleUUID))
+                //.addServiceUuid(pUuid)
                 .build();
 
         //A callback to record success/failure
@@ -163,18 +223,11 @@ public class userProfile extends AppCompatActivity {
             }
         };
 
-        System.out.println("testing line--->");
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_ADVERTISE) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        advertiser.startAdvertising(settings, data, advertisingCallback);
+       advertiser.startAdvertising(settings, data, advertisingCallback);
+       //initiate gatt service
+       initializeGattServer();
     }
+
+
 
 }

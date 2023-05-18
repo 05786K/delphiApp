@@ -7,7 +7,7 @@ public class User {
 
 
 	/**
-	 * @param user_id
+	 * @param userId
 	 * @param first_name
 	 * @param last_name
 	 * @param email
@@ -21,7 +21,7 @@ public class User {
 	 * @param protein
 	 */
 
-	private String user_id;
+	private String userId;
 	private String first_name, last_name;
 
 	private String email;
@@ -44,12 +44,12 @@ public class User {
 		this.filters = filters;
 	}
 
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getFirst_name() {
