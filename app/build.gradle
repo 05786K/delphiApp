@@ -42,5 +42,8 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.7.2'
     implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
     implementation 'com.squareup.okhttp3:okhttp:3.6.0'
+
+    //sdp for responsiveness
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
 }
 

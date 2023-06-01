@@ -51,7 +51,7 @@ public class signUpActivity extends AppCompatActivity {
     SeekBar calories_bar, total_fat_bar, saturated_fat_bar, sodium_bar, carb_bar, sugars_bar, protein_bar;
 
     //checkboxes
-    CheckBox nuts_checkbox, vegan_checkbox, lactose_checkbox;
+    CheckBox nuts_checkbox, vegan_checkbox, lactose_checkbox, chicken_checkbox, gluten_checkbox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +77,8 @@ public class signUpActivity extends AppCompatActivity {
         nuts_checkbox = findViewById(R.id.nuts_checkbox_input);
         vegan_checkbox = findViewById(R.id.vegan_checkbox_input);
         lactose_checkbox = findViewById(R.id.lactose_checkbox_input);
+        chicken_checkbox = findViewById(R.id.chicken_checkbox_input);
+        gluten_checkbox = findViewById(R.id.gluten_checkbox_input);
 
         _signup_btn = findViewById(R.id.submit_btn);
         _signup_btn.setOnClickListener(new View.OnClickListener() {
@@ -144,6 +146,10 @@ public class signUpActivity extends AppCompatActivity {
             filters.add("vegan");
         if(lactose_checkbox.isChecked())
             filters.add("lactose");
+        if(chicken_checkbox.isChecked())
+            filters.add("chicken");
+        if(gluten_checkbox.isChecked())
+            filters.add("gluten");
 
 
 
@@ -176,6 +182,8 @@ public class signUpActivity extends AppCompatActivity {
                             vegan_checkbox.setChecked(false);
                             nuts_checkbox.setChecked(false);
                             lactose_checkbox.setChecked(false);
+                            chicken_checkbox.setChecked(false);
+                            gluten_checkbox.setChecked(false);
 
                         }else{
                             Toast.makeText(signUpActivity.this, "User Registration Failed!", Toast.LENGTH_LONG).show();

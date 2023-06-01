@@ -1,9 +1,7 @@
 package com.example.delphidisplays;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothGattCharacteristic;
@@ -15,28 +13,16 @@ import android.bluetooth.le.AdvertiseCallback;
 import android.bluetooth.le.AdvertiseData;
 import android.bluetooth.le.AdvertiseSettings;
 import android.bluetooth.le.BluetoothLeAdvertiser;
-import android.bluetooth.le.BluetoothLeScanner;
-import android.bluetooth.le.ScanCallback;
-import android.bluetooth.le.ScanFilter;
-import android.bluetooth.le.ScanResult;
-import android.bluetooth.le.ScanSettings;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.ParcelUuid;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -45,7 +31,7 @@ public class userProfile extends AppCompatActivity {
     TextView first_name, last_name, email, userId;
     Button signOut_btn;
 
-    Button advertise_btn;
+    Button advertise_btn, recommend_page_btn;
     TextView resultBox;
 
     BluetoothManager myBluetoothManager;
@@ -81,6 +67,11 @@ public class userProfile extends AppCompatActivity {
         //BLE stuff
         advertise_btn = findViewById(R.id.advertise_btn);
 
+        //recommend button
+        recommend_page_btn = findViewById(R.id.recommend_page_btn);
+
+
+
 
         signOut_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,8 +90,21 @@ public class userProfile extends AppCompatActivity {
             }
         });
 
+        recommend_page_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RecommendPage();
+            }
+        });
+
 
         //advertise();
+    }
+    public void RecommendPage(){
+        Intent goToRecommendPage = new Intent(userProfile.this, recommendActivity.class);
+        goToRecommendPage.putExtra("_userId", getIntent().getStringExtra("userId")); // put user id in recommend page
+        startActivity(goToRecommendPage);
+        finish();
     }
 
     @SuppressLint("MissingPermission")
@@ -110,6 +114,7 @@ public class userProfile extends AppCompatActivity {
         email.setText(null);
         userId.setText(null);
 
+        //close the gatt server when users pops out
         if(gattServer != null)
             gattServer.close();
 

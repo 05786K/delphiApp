@@ -36,6 +36,9 @@
             android:name=".userProfile"
             android:exported="false" />
         <activity
+            android:name=".recommendActivity"
+            android:exported="false" />
+        <activity
             android:name=".signInActivity"
             android:exported="false" />
         <activity
