@@ -125,19 +125,19 @@ public class signUpActivity extends AppCompatActivity {
 
         //pass the required variables to registerUser method in userApi
         String first_name, last_name, email, password;
-        int calories, total_fat, saturated_fat, sodium, carbohydrates, sugars, protein;
+        double calories, total_fat, saturated_fat, sodium, carbohydrates, sugars, protein;
 
         first_name = _first_name.getText().toString();
         last_name = _last_name.getText().toString();
         email = _email.getText().toString();
         password = _password.getText().toString();
-        calories = calories_bar.getProgress();
-        total_fat = total_fat_bar.getProgress();
-        saturated_fat = total_fat_bar.getProgress();
-        sodium = sodium_bar.getProgress();
-        carbohydrates = carb_bar.getProgress();
-        sugars = sugars_bar.getProgress();
-        protein = protein_bar.getProgress();
+        calories = (double) calories_bar.getProgress();
+        total_fat = (double) total_fat_bar.getProgress();
+        saturated_fat = (double) total_fat_bar.getProgress();
+        sodium = (double) sodium_bar.getProgress();
+        carbohydrates = (double) carb_bar.getProgress();
+        sugars = (double) sugars_bar.getProgress();
+        protein = (double) protein_bar.getProgress();
 
         ArrayList<String> filters = new ArrayList<>();
         if(nuts_checkbox.isChecked())
