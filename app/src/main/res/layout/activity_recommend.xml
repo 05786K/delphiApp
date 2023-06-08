@@ -9,38 +9,41 @@
     tools:layout_editor_absoluteY="-189dp">
 
 
-    <Button
-        android:id="@+id/recommend_btn"
-        android:layout_width="282dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:height="0dp"
-        android:background="@drawable/btn_style"
-        android:padding="10dp"
-        android:text="Recommend"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/restaurant_ID_input"
-        app:layout_constraintTop_toBottomOf="@+id/restaurant_ID_input" />
-
     <TextView
         android:id="@+id/textView3"
-        android:layout_width="645dp"
-        android:layout_height="65dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
         android:text="Display Recommended Food"
         android:textColor="@color/white"
         android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.756"
+        app:layout_constraintHorizontal_bias="0.361"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
+        android:id="@+id/userID_input"
+        android:layout_width="286dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="108dp"
+        android:layout_marginTop="28dp"
+        android:backgroundTint="@color/brown"
+        android:backgroundTintMode="add"
+        android:ems="10"
+        android:hint="User ID"
+        android:inputType="text"
+        android:textColorHint="@color/white"
+        android:textSize="20dp"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"></EditText>
+
+    <EditText
         android:id="@+id/restaurant_ID_input"
         android:layout_width="283dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="18dp"
+        android:layout_height="wrap_content"
         android:backgroundTint="@color/brown"
         android:backgroundTintMode="add"
         android:ems="10"
@@ -52,21 +55,105 @@
         app:layout_constraintStart_toStartOf="@+id/userID_input"
         app:layout_constraintTop_toBottomOf="@+id/userID_input"></EditText>
 
-    <EditText
-        android:id="@+id/userID_input"
-        android:layout_width="286dp"
+    <Button
+        android:id="@+id/recommend_btn"
+        android:layout_width="282dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:height="0dp"
+        android:background="@drawable/btn_style"
+        android:padding="10dp"
+        android:text="Recommend"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/restaurant_ID_input"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_ID_input" />
+
+    <Button
+        android:id="@+id/back_to_userProfile"
+        android:layout_width="282dp"
         android:layout_height="50dp"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="12dp"
+        android:height="20dp"
+        android:background="@drawable/btn_style"
+        android:onClick="signOut"
+        android:padding="10dp"
+        android:text="Sign Out"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/order_btn"
+        app:layout_constraintTop_toBottomOf="@+id/order_btn" />
+
+    <ListView
+        android:id="@+id/results_listView"
+        android:layout_width="771dp"
+        android:layout_height="400dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/recommend_btn">
+
+    </ListView>
+
+    <EditText
+        android:id="@+id/food_item_numbers"
+        android:layout_width="283dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/brown"
         android:backgroundTintMode="add"
+        android:ems="10"
+        android:hint="Food Item Numbers"
+        android:inputType="text"
+        android:soundEffectsEnabled="false"
+        android:textColorHint="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/restaurant_ID_input2"
+        app:layout_constraintTop_toBottomOf="@+id/restaurant_ID_input2"></EditText>
+
+    <EditText
+        android:id="@+id/userID_input2"
+        android:layout_width="286dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="248dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="@color/brown"
+        android:backgroundTintMode="add"
+        android:baselineAligned="false"
         android:ems="10"
         android:hint="User ID"
         android:inputType="text"
         android:textColorHint="@color/white"
         android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline36"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"></EditText>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/results_listView"></EditText>
+
+    <EditText
+        android:id="@+id/restaurant_ID_input2"
+        android:layout_width="287dp"
+        android:layout_height="49dp"
+        android:backgroundTint="@color/brown"
+        android:backgroundTintMode="add"
+        android:ems="10"
+        android:hint="Restaurant ID"
+        android:inputType="text"
+        android:soundEffectsEnabled="false"
+        android:textColorHint="@color/white"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/userID_input2"
+        app:layout_constraintTop_toBottomOf="@+id/userID_input2"></EditText>
+
+
+    <Button
+        android:id="@+id/order_btn"
+        android:layout_width="282dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:height="0dp"
+        android:background="@drawable/btn_style"
+        android:padding="10dp"
+        android:text="Order"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="@+id/food_item_numbers"
+        app:layout_constraintTop_toBottomOf="@+id/food_item_numbers" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline36"
@@ -76,34 +163,59 @@
         app:layout_constraintGuide_begin="20dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline39"
+        android:id="@+id/guideline124"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="20dp" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline126"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
-    <ListView
-        android:id="@+id/results_listView"
-        android:layout_width="778dp"
-        android:layout_height="788dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="28dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline36"
-        app:layout_constraintTop_toBottomOf="@+id/back_to_userProfile" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline128"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
-    <Button
-        android:id="@+id/back_to_userProfile"
-        android:layout_width="282dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="38dp"
-        android:height="20dp"
-        android:background="@drawable/btn_style"
-        android:onClick="signOut"
-        android:padding="10dp"
-        android:text="Sign Out"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="@+id/recommend_btn"
-        app:layout_constraintTop_toBottomOf="@+id/recommend_btn" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline129"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline130"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline131"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline132"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline133"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

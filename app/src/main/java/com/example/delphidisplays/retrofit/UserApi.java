@@ -1,6 +1,7 @@
 package com.example.delphidisplays.retrofit;
 
 import com.example.delphidisplays.model.LoginInfo;
+import com.example.delphidisplays.model.Order;
 import com.example.delphidisplays.model.Recommendation;
 import com.example.delphidisplays.model.User;
 
@@ -31,4 +32,6 @@ public interface UserApi {
             (@Path("userId") String userId,
              @Path("restaurantId") String restaurantId);
 
+    @POST("/delphi/orders/register")
+    Call<ResponseBody> registerOrder(@Body Order order);
 }

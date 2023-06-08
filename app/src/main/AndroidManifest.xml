@@ -36,6 +36,7 @@
             android:name=".userProfile"
             android:exported="false" />
         <activity
+            android:windowSoftInputMode="stateHidden|adjustPan"
             android:name=".recommendActivity"
             android:exported="false" />
         <activity
