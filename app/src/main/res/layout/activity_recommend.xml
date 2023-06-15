@@ -101,7 +101,7 @@
         android:backgroundTint="@color/brown"
         android:backgroundTintMode="add"
         android:ems="10"
-        android:hint="Food Item Numbers"
+        android:hint="Item ID (Space Seperated)"
         android:inputType="text"
         android:soundEffectsEnabled="false"
         android:textColorHint="@color/white"
@@ -213,6 +213,13 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline133"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline39"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

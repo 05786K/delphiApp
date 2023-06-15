@@ -117,7 +117,7 @@ public class recommendActivity extends AppCompatActivity {
 
 
         ArrayList<String> foodItems = new ArrayList();
-
+        foodItems.add("Rank      " + "Item Id        " + "Item Name");
 
         //listView
         ListView listView = (ListView) findViewById(R.id.results_listView);
@@ -136,8 +136,7 @@ public class recommendActivity extends AppCompatActivity {
                             if (resultsArray != null) {
 
                                 for(Recommendation recom : resultsArray){
-                                    foodItems.add(
-                                            recom.getRank() + "      " + recom.getItemName());
+                                    foodItems.add(recom.getRank() + "            " + recom.getItemId() + "             " + recom.getItemName());
                                 }
                                 listView.setAdapter(adapter);
 
